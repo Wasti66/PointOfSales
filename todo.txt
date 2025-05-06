@@ -1,0 +1,19 @@
+users table
+id->done
+firstName->done
+lastName->done
+userName->done
+email->done
+phone->done
+images->done
+otp->done
+created_at->done
+updated-at->done
+
+command line :
+php artisan make:migration create_users_table
+php artisan migration
+
+-> JWT token create
+-> JWT token Verify
+-> OTP code send emial and update otp code database
