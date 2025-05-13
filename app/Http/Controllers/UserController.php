@@ -14,6 +14,12 @@ class UserController extends Controller
     function UserLoginPage(){
         return view('pages.auth.userLogin-page');
     }
+    function UserRegistrationPage(){
+        return view('pages.auth.UserRegistration-page');
+    }
+    function userDashboard(){
+        return view('pages.dashboard.dashboard');
+    }
 
     //backend api
     //User Registration api
@@ -59,7 +65,7 @@ class UserController extends Controller
                 );
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'User login successfully',
+                    'message' => 'Login successfully',
                     'token' => $token
                 ], 200);
     
@@ -69,7 +75,7 @@ class UserController extends Controller
                     'status' => 'failed',
                     //'message' => $e->getMessage(),
                     'message' => 'unauthorized'
-                ], 500);
+                ], 401);
             }
         }catch(Exception $e){
             return response()->json([

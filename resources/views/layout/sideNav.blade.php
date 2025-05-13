@@ -1,33 +1,34 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>X-Bakary</title>
-    <!-- CSS -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/toastify.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/progress.css') }}" rel="stylesheet" />
-    <script src="{{ asset('js/toastify.min.js') }}"></script>
-    <script src="{{ asset('js/axios.min.js') }}"></script>
-    <script src="{{ asset('js/config.js') }}"></script>
-</head>
-<body>
-    <div id="loader" class="LoadingOverlay d-none">
-        <div class="Line-Progress">
-            <div class="indeterminate"></div>
+@include('component.dashboard.head')
+    <!-- lodar -->
+    @include('component.loder.loder')
+    
+    
+    <div class="align-items-stretch d-flex w-100">
+            
+        <!-- dashboard logo and sidebar -->
+        <aside class="bg-dark transition-all-35 js-sidebar" id="sidebar">
+            <!-- contant for sidebar -->
+            <div class="h-100 px-2 py-4">
+                <!-- dashboard logo -->
+                <div>
+                    <h3 class="text-white">Logo</h3>
+                </div>
+                <!-- side nav link -->
+                @include('component.dashboard.side-nav')   
+            </div>
+        </aside>
+
+        <!-- header -->
+        <div class="min-vh-100 w-100 d-flex flex-column overflow-hidden bg-body-secondary transition-all-35">
+            <!-- top nav -->
+            @include('component.dashboard.top-nav')
+            <!-- main contant -->
+            <main class="px-3 py-2 content">
+                @yield('contant')
+            </main>
+
         </div>
+
     </div>
-    <!-- Header -->
-    <header></header>
-    <!-- Main -->
-    <main>
-        @section('contant')
-        @show
-    </main>
-    <!-- Footer -->
-    <footer></footer>
-    <!-- JS -->
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-</body>
-</html>
+
+    @include('component.dashboard.footer')

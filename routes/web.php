@@ -14,3 +14,5 @@ Route::post('/reset-password',[UserController::class,'ResetPassword'])->middlewa
 
 
 Route::get('/userLogin',[UserController::class,'UserLoginPage']);
+Route::get('/UserRegistration',[UserController::class,'UserRegistrationPage']);
+Route::get('/dashboard',[UserController::class,'userDashboard']);

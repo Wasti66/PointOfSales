@@ -1,34 +1,77 @@
-<!-- user login form -->
-<section class="bg-light vh-100 d-flex align-items-center">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-5 col-md-8 col-sm-12">
-                <div class="card card-body border-0 shadoe-sm">
-                    <h3 class="poppins-medium mb-4">Login to your account</h3>
-                    <!-- form -->
-                    <!-- user name or password -->
-                    <div class="mb-3">
-                        <label for="email">User name or Email</label>
-                        <div class="input-group bg-light">
-                            <span class="input-group-text" id="basic-addon1">
-                                <i class="fa-solid fa-envelope"></i>
-                            </span>
-                            <input type="text" class="form-control bg-light custom-input" name="email" id="email">
-                        </div>
-                    </div>
-                    <!-- password -->
-                    <div class="mb-3">
-                        <label for="password">Password</label>
-                        <div class="input-group bg-light">
-                            <span class="input-group-text" id="basic-addon1">
-                                <i class="fa-solid fa-lock"></i>
-                            </span>
-                            <input type="password" class="form-control bg-light custom-input" name="password" id="password">
-                        </div>
-                    </div>
-                    <input type="submit" class="form-control bg-success text-white shadow-none poppins-medium" value="Login">
-                </div>
-            </div>
-        </div>
+<div>
+    <!-- user name or email -->
+    <div class="mb-4">
+        <label for="email" class="poppins-medium fw-normal">Email/Username</label>
+        <input type="text" name="email" id="email" class="form-control border border-secondary custom-input poppins-medium" placeholder="Email">
+        <small id="emailError" class="text-danger"></small>
     </div>
-</section>
+    <!-- password -->
+    <div class="mb-4">
+        <label for="password" class="poppins-medium fw-normal">Password</label>
+        <input type="password" name="password" id="password" class="form-control border border-secondary custom-input poppins-medium" placeholder="Password">
+        <small id="errorPass" class="text-danger"></small>
+    </div>
+    <!-- forget and login button -->
+    <div class="mb-4 text-end">
+        <a href="#" class="link-dark me-2"><small>Forgot your password?</small></a>
+        <button onclick="SubmitLogin()" class="btn btn-dark px-3 text-uppercase"><small>login</small></button>
+    </div>
+    <!-- registration page -->
+    <a href="/UserRegistration" class="text-black-50 fw-medium">Or Create An Account?</a>
+</div>
+
+<script>
+    function clearErrors() {
+        document.querySelectorAll("small.text-danger").forEach((el) => (el.innerText = ""));
+    }
+    async function SubmitLogin(){
+
+        clearErrors();
+        let error =false;
+
+        let email = document.getElementById('email').value.trim();
+        let password = document.getElementById('password').value.trim();
+
+        if(email.length === 0){
+            document.getElementById('emailError').innerText = "Email field required";
+            error = true;
+        }
+        if(password.length === 0){
+            document.getElementById('errorPass').innerText = "Password field required";
+        }
+        if(!error){
+            try{
+
+                showLoader();
+                let res = await axios.post("/user-login",{
+                    email:email,
+                    password:password
+                })
+                hideLoader();
+                if(res.status === 200 && res.data['status'] === 'success'){
+                    successToast(res.data['message'])
+                    setTimeout(function (){
+                        window.location.href="/dashboard"
+                    }, 1000)
+                    
+                }
+
+            }catch(error){
+                hideLoader();
+                if(error.response){
+                    if(error.response.status === 401){
+                        errorToast(error.response.data['message']);
+                    }else{
+                        errorToast("Server error: " + error.response.status);
+                    }
+                }else{
+                    errorToast("Network or unknown error occurred");
+                }
+            }
+            
+        }
+        
+    }
+</script>
+
+
