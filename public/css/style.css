@@ -6,8 +6,8 @@
     font-style: normal;
 }
 .custom-input:focus {
-    border-color: blue!important;
+    border-color: #0dcaf0!important;
     box-shadow: none!important;
-    border: 2px solid blue!important; 
+    border: 2px solid #0dcaf0!important; 
 }
 

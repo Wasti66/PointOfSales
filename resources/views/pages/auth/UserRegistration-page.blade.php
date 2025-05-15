@@ -9,7 +9,7 @@
                     <img src="images/reg.png" class="img-fluid" alt="registration-image">
                 </div>
                 <div class="col-lg-5 col-md-6 col-sm-12 col-11">
-                    <h4 class="fw-semibold poppins-medium text-capitalize mb-4 text-end">create a account</h5>
+                    <h4 class="fw-semibold poppins-medium mb-4 text-end">Create a account</h5>
                     <!-- login form -->    
                     @include('component.auth.userRegistrationFrom')
                 </div>

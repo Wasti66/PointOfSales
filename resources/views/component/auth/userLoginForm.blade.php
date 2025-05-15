@@ -13,11 +13,11 @@
     </div>
     <!-- forget and login button -->
     <div class="mb-4 text-end">
-        <a href="#" class="link-dark me-2"><small>Forgot your password?</small></a>
+        <a href="{{ url('/sendOtp') }}" class="link-dark me-2"><small>Forgot your password?</small></a>
         <button onclick="SubmitLogin()" class="btn btn-dark px-3 text-uppercase"><small>login</small></button>
     </div>
     <!-- registration page -->
-    <a href="/UserRegistration" class="text-black-50 fw-medium">Or Create An Account?</a>
+    <a href="{{url('/UserRegistration')}}" class="text-black-50 fw-medium">Or Create An Account?</a>
 </div>
 
 <script>

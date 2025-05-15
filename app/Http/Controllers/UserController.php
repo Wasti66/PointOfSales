@@ -17,6 +17,15 @@ class UserController extends Controller
     function UserRegistrationPage(){
         return view('pages.auth.UserRegistration-page');
     }
+    function VerifyOtpPage(){
+        return view('pages.auth.verifyOtpPage');
+    }
+    function sentOtpPage(){
+        return view('pages.auth.sendOtp-page');
+    }
+    function ResetPasswordPage(){
+        return view('pages.auth.resetPasswordPage');
+    } 
     function userDashboard(){
         return view('pages.dashboard.dashboard');
     }
@@ -35,14 +44,14 @@ class UserController extends Controller
             ]);
             return response()->json([
                 'status' => 'success',
-                'message' => 'User registration successfully'
+                'message' => 'Registration successfully'
             ], 200);
         }catch(Exception $e){
             return response()->json([
                 'status' => 'failed',
                 //'message' => $e->getMessage(),
                 'message' => 'User registration failed'
-            ], 500);
+            ], 401);
         }
         
     }
@@ -66,8 +75,8 @@ class UserController extends Controller
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Login successfully',
-                    'token' => $token
-                ], 200);
+                    //'token' => $token
+                ], 200)->cookie('token',$token,60*24*30);
     
     
             }else{
@@ -100,17 +109,18 @@ class UserController extends Controller
             if($count == 1){
                 //send otp code user email
                 Mail::to($email)->send(new OTPMail($otp));
+                
                 //otp code update database table
                 User::where('email','=',$email)->update(['otp'=>$otp]);
                 return response()->json([
                     'status' => 'success',
-                    'message' => '4 digit OTP code send your email'
+                    'message' => '4 digit OTP code has been send your email'
                 ],200);
             }else{
                 return response()->json([
                     'status' => 'failed',
-                    'message' => 'OTP code send failed'
-                ],500);
+                    'message' => 'Invalid Email'
+                ]);
             }
 
         }
@@ -143,14 +153,14 @@ class UserController extends Controller
                 return response()->json([
                     'status' => 'success',
                     'message' => 'OTP code verification successfully',
-                    'token' => $token
-                ],200);
+                    //'token' => $token
+                ],200)->cookie('token',$token,60*24*30);;
 
             }else{
                 return response()->json([
                     'status' => 'failed',
                     'message' => 'OTP code Invalid'
-                ],500);
+                ]);
             }
 
         }
