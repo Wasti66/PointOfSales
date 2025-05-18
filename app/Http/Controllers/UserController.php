@@ -26,8 +26,14 @@ class UserController extends Controller
     function ResetPasswordPage(){
         return view('pages.auth.resetPasswordPage');
     } 
+    function logOut(){
+        return redirect('/userLogin')->cookie('token','',-1);
+    }
     function userDashboard(){
         return view('pages.dashboard.dashboard');
+    }
+    function userChangePassword(){
+        return view('pages.dashboard.settingsPage');
     }
 
     //backend api
@@ -64,13 +70,15 @@ class UserController extends Controller
                 $query->where('email', $request->input('email'))
                       ->orWhere('userName', $request->input('email'));
             })
-            ->where('password', $request->input('password'))->first();
+            ->where('password', $request->input('password'))
+            ->select('id')->first();
     
-            if($user){
+            if($user != null){
     
                 $token = JWTToken::createToken(
                     $request->input('email'),
-                    $request->input('userName')
+                    $request->input('userName'),
+                    $user->id
                 );
                 return response()->json([
                     'status' => 'success',
@@ -194,5 +202,34 @@ class UserController extends Controller
         }
         
     }
+
+    //change password
+    function changePassword(Request $request){
+        $current_password = $request->input('current_password');
+        $new_password = $request->input('new_password');
+        $id = $request->header('id');
+
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json(['status' => 'failed', 'message' => 'User not found'], 404);
+        }
+
+        if ($user->password !== $current_password) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Current password does not match'
+            ], 400);
+        }
+
+        $user->password = $new_password;
+        $user->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Password changed successfully'
+        ], 200);
+    }
+
 
 }

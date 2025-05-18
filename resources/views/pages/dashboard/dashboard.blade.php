@@ -1,4 +1,5 @@
 @extends('layout.sideNav')
+@section('title','dashboard')
 @section('contant')
     <section>
         <div class="container">
