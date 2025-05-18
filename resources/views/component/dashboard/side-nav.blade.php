@@ -1,26 +1,26 @@
 <ul class="navbar-nav">
-    <li class="nav-item border-bottom border-secondary">
-        <a class="nav-link text-white d-flex align-items-center fw-semibold" href="{{ url('/dashboard') }}">
+    <li class="nav-item">
+        <a class="nav-link text-white d-flex align-items-center poppins-medium fw-normal" href="{{ url('/dashboard') }}">
             <i class="fa-solid fa-house me-2"></i>
-            Dashboard
+            <span class="mt-1">Dashboard</span>
         </a>                           
     </li>
-    <li class="nav-item border-bottom border-secondary">
-        <a class="nav-link text-white d-flex align-items-center fw-semibold" href="">
+    <li class="nav-item">
+        <a class="nav-link text-white d-flex align-items-center poppins-medium fw-normal" href="{{ url('/userProfile') }}">
             <i class="fa-regular fa-user me-2"></i>
-            User Profile
+            <span class="mt-1">User Profile</span>
         </a>                           
     </li>
-    <li class="nav-item border-bottom border-secondary">
-        <a class="nav-link text-white d-flex align-items-center fw-semibold" href="{{ url('/setting') }}">
+    <li class="nav-item">
+        <a class="nav-link text-white d-flex align-items-center poppins-medium fw-normal" href="{{ url('/setting') }}">
             <i class="fa-solid fa-gear me-2"></i>
-            Setting
+            <span>Setting</span>
         </a>                           
     </li>
-    <li class="nav-item border-bottom border-secondary">
-        <a class="nav-link text-white d-flex align-items-center fw-semibold" href="{{ url('/logOut') }}">
+    <li class="nav-item">
+        <a class="nav-link text-white d-flex align-items-center poppins-medium fw-normal" href="{{ url('/logOut') }}">
             <i class="fa-solid fa-arrow-right-from-bracket me-2"></i>
-            LogOut
+            <span>LogOut</span>
         </a>                           
     </li>
 </ul>

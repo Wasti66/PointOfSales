@@ -24,3 +24,5 @@ Route::get('/verifyOtp',[UserController::class,'VerifyOtpPage']);
 Route::get('/resetPassword',[UserController::class,'ResetPasswordPage'])->middleware([TokenVerificationMiddleware::class]);
 Route::get('/dashboard',[UserController::class,'userDashboard'])->middleware([TokenVerificationMiddleware::class]);
 Route::get('/setting',[UserController::class,'userChangePassword'])->middleware([TokenVerificationMiddleware::class]);
+Route::get('/userProfile',[UserController::class,'userProfilePage'])->middleware([TokenVerificationMiddleware::class]);
+

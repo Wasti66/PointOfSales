@@ -32,6 +32,9 @@ class UserController extends Controller
     function userDashboard(){
         return view('pages.dashboard.dashboard');
     }
+    function userProfilePage(){
+        return view('pages.dashboard.userProfilePage');
+    }
     function userChangePassword(){
         return view('pages.dashboard.settingsPage');
     }
