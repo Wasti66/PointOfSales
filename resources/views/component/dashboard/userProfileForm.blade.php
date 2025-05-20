@@ -1,9 +1,14 @@
 <div class="row g-4">
+    <!-- profile images --> 
+    <div style="margin-top:-50px">
+      <img src="{{ url('images/profile-image/profile.png') }}" alt="profile-image" id="profileImage" height="120px" width="120px" class="rounded-circle object-fit-cover border">  
+      <input type="file" id="imageInput" class="d-none">
+    </div>
     <!-- update email --> 
     <div class="col-md-6">
         <div>
             <label for="email" class="poppins-medium fw-normal"><small>Email</small></label>
-            <input type="text" name="email" id="email" class="form-control form-control-sm border border-black-50 custom-input poppins-medium" placeholder="Email">
+            <input type="text" name="email" id="email" class="form-control form-control-sm border border-black-50 custom-input poppins-medium" placeholder="Email" disabled>
             <small id="errorCurrentPass" class="text-danger"></small>
         </div>
     </div>
@@ -18,8 +23,8 @@
     <!-- update lastname -->
     <div class="col-md-6">
         <div>
-            <label for="lastname" class="poppins-medium fw-normal"><small>Last Name</small></label>
-            <input type="text" name="lastname" id="lastname" class="form-control form-control-sm border border-black-50 custom-input poppins-medium" placeholder="Last Name">
+            <label for="lastName" class="poppins-medium fw-normal"><small>Last Name</small></label>
+            <input type="text" name="lastName" id="lastName" class="form-control form-control-sm border border-black-50 custom-input poppins-medium" placeholder="Last Name">
             <small id="errorCurrentPass" class="text-danger"></small>
         </div>
     </div>
@@ -42,59 +47,61 @@
    </div>
 </div>
 <script>
+    getProfile()
+    async function getProfile(){
+        showLoader();
+        let res = await axios.get("/user-profile")
+        hideLoader();
+        if(res.status === 200 && res.data['status'] === "success"){
+            let data = res.data['data'];
+
+            let fields = ['email', 'firstName', 'lastName', 'userName', 'phone'];
+
+            fields.forEach(field => {
+                if (document.getElementById(field)) {
+                    document.getElementById(field).value = data[field] || '';
+                }
+            });
+        }else{
+            errorToast(res.data['message']);
+        }
+    }
     function clearErrors() {
         document.querySelectorAll("small.text-danger").forEach((el) => (el.innerText = ""));
         document.querySelectorAll("input").forEach((el) => el.classList.remove("is-invalid"));
     }
-    async function changePassword(){
-        clearErrors();
-        let error = false;
-
-        let currentPassInput = document.getElementById('current_password');
-        let current_password = currentPassInput.value.trim();
-
-        let newPassInput = document.getElementById('new_password');
-        let new_password = newPassInput.value.trim();
-
-        let confirmPassInput = document.getElementById('confirm_password');
-        let confirm_password = confirmPassInput.value.trim();
-
-        if(current_password.length === 0){
-            document.getElementById('errorCurrentPass').innerText = "Current password required!";
-            currentPassInput.classList.add("is-invalid");
-            error = true;
-        }
-        if(new_password.length < 6){
-            document.getElementById('errorNewPass').innerText = "Password must be at least 6 characters";
-            newPassInput.classList.add("is-invalid");
-            error = true;
-        }
-        if(new_password !== confirm_password){
-            document.getElementById('errorConfirmPass').innerText = "Passwords do not match";
-            confirmPassInput.classList.add("is-invalid");
-            error = true;
-        }
-
-        if(!error){
+    async function updateUserProfile(){
+        let firstName = document.getElementById('firstName').value.trim();
+        let lastName = document.getElementById('lastName').value.trim();
+        let userName = document.getElementById('userName').value.trim();
+        let phone = document.getElementById('phone').value.trim();
+        
+        if(firstName.length === 0){
+            errorToast('First Name field required');
+        }else if(lastName.length === 0){
+            errorToast('Last Name field required');
+        }else if(userName.length === 0){
+            errorToast('User Name field required');
+        }else if(phone.length === 0){
+            errorToast('Phone field required');
+        }else{
             showLoader();
-            try {
-                let res = await axios.post("/change-password", {
-                    current_password: current_password,
-                    new_password: new_password
-                });
-                hideLoader();
-                if(res.status === 200 && res.data['status'] === 'success'){
-                    successToast(res.data['message']);
-                    setTimeout(function (){
-                        window.location.href="/setting"
-                    }, 1000)
-                } else {
-                    errorToast(res.data['message']);
-                }
-            } catch (err) {
-                hideLoader();
-                errorToast("Current Password dosen't match!");
+            let res = await axios.post("/update-profile",{
+                firstName:firstName,
+                lastName:lastName,
+                userName:userName,
+                phone:phone
+            })
+            hideLoader();
+            if(res.status === 200 && res.data['status'] === "success"){
+                successToast(res.data['message']);
+                setTimeout(function (){
+                    window.location.href="/userProfile"
+                }, 2000)
+            }else{
+                errorToast(res.data['message']);
             }
         }
     }
+    
 </script>

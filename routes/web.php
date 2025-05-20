@@ -12,6 +12,8 @@ Route::post('/verify-otp',[UserController::class,'verifyOTP']);
 Route::post('/change-password',[UserController::class,'changePassword'])->middleware([TokenVerificationMiddleware::class]);
 //verify token
 Route::post('/reset-password',[UserController::class,'ResetPassword'])->middleware([TokenVerificationMiddleware::class]);
+Route::get('/user-profile',[UserController::class,'userProfile'])->middleware([TokenVerificationMiddleware::class]);
+Route::post('/update-profile',[UserController::class,'updateProfile'])->middleware([TokenVerificationMiddleware::class]);
 
 //logout
 Route::get('/logOut',[UserController::class,'logOut']);

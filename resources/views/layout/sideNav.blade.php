@@ -23,7 +23,7 @@
             <!-- top nav -->
             @include('component.dashboard.top-nav')
             <!-- main contant -->
-            <main class="px-3 py-2 content">
+            <main class="px-3 py-2 content" id="content">
                 @yield('contant')
             </main>
 

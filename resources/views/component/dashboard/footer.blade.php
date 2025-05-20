@@ -5,6 +5,6 @@
         sidebarToggle.addEventListener("click",function(){
             document.querySelector("#sidebar").classList.toggle("collapsed");
         });
-    </script>  
-</body>
-</html>
+    </script>
+   </body>
+</html>   

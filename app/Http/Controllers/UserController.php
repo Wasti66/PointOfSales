@@ -205,7 +205,51 @@ class UserController extends Controller
         }
         
     }
+    //user profile
+    function userProfile(Request $request){
+        $email = $request->header('email');
+        $user = User::where('email', '=', $email)->first();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Request successfully',
+            'data' => $user
+        ],200);
+    }
+    //update profile
+    function updateProfile(Request $request){
+        try{
 
+            $email = $request->header('email');
+
+            $firstName = $request->input('firstName');
+            $lastName = $request->input('lastName');
+            $userName = $request->input('userName');
+            $phone = $request->input('phone');
+
+            
+
+            User::where('email', '=', $email)->update([
+                'firstName' => $firstName,
+                'lastName' => $lastName,
+                'userName' => $userName,
+                'phone' => $phone
+            ]);
+
+            
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Update successfully'
+            ],200);
+
+        }catch(Exception $e){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Request failed'
+            ],200);
+        }
+        
+    }
     //change password
     function changePassword(Request $request){
         $current_password = $request->input('current_password');
