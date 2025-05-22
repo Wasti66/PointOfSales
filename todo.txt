@@ -43,3 +43,13 @@ command line :
 php artisan make:migration create_categories_table
 php artisan migration
 php artisan make:model Category -mc
+
+
+$table->id();
+            $table->string('name',50);
+
+            $table->unsignedBigInteger('User_id');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->restrictOnDelete();
+            
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

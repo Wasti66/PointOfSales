@@ -11,9 +11,12 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/toastify.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/dataTables.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/progress.css') }}" rel="stylesheet" />
     <script src="{{ asset('js/toastify.min.js') }}"></script>
     <script src="{{ asset('js/axios.min.js') }}"></script>
     <script src="{{ asset('js/config.js') }}"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/dataTables.min.js') }}"></script>
 </head>
 <body>
