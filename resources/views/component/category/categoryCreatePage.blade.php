@@ -17,8 +17,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button id="closeData" class="btn btn-danger" data-bs-dismiss="modal"><small>Close</small></button>
-        <button onclick="addcategory()" class="btn btn-dark px-3 text-uppercase"><small>save</small></button>
+        <button id="closeData" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</</button>
+        <button onclick="addcategory()" class="btn btn-sm btn-dark px-3 text-uppercase">save</button>
       </div>
     </div>
   </div>

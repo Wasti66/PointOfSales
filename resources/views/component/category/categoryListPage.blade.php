@@ -47,16 +47,25 @@
                          <td class="text-center">${index+ 1}</td>
                          <td class="text-center">${item.name}</td>
                          <td class="text-center">
-                            <button class="btn btn-sm btn-outline-success"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button data-id="${item.id}" class="editBtn btn btn-sm btn-outline-success"><i class="fa-solid fa-pen-to-square"></i></button>
                             <button data-id="${item.id}"  class="deleteBtn btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash-can"></i></button>
                          </td>
                       </tr>`
             tableList.append(row);         
         });
 
+        //category edit function
+        $('.editBtn').on('click', async function(){
+            let id = $(this).data('id');
+            await FillupUpdateForm(id)
+            $('#categoryUpdate').modal('show');
+            
+        })
+        //category delete function
         $('.deleteBtn').on('click', function(){
             let id = $(this).data('id');
             $('#categoryDelete').modal('show');
+            $('#deleteId').val(id);
         })
 
         tableData.DataTable({

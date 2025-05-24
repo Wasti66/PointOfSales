@@ -63,6 +63,14 @@ class CategoryController extends Controller
                 
     }
 
+    //category by id
+    function categoryById(Request $request){
+        $category_id = $request->input('id');
+        $user_id = $request->header('id');
+        $category = Category::where('id', $category_id)->where('user_id', $user_id)->first();
+        return response()->json($category);
+    }
+
     //category update
     function categoryUpdate(Request $request){
         $name = $request->input('name');
