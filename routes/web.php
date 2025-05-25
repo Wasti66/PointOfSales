@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +30,7 @@ Route::get('/dashboard',[UserController::class,'userDashboard'])->middleware([To
 Route::get('/setting',[UserController::class,'userChangePassword'])->middleware([TokenVerificationMiddleware::class]);
 Route::get('/userProfile',[UserController::class,'userProfilePage'])->middleware([TokenVerificationMiddleware::class]);
 
-//categories front-end page api
+//categories front-end api page
 Route::get('/category',[CategoryController::class,'categoryPage'])->middleware([TokenVerificationMiddleware::class]);
 
 //categories api
@@ -38,4 +39,14 @@ Route::post('/create-category',[CategoryController::class,'createCaregories'])->
 Route::post('/category-delete',[CategoryController::class,'categoryDelete'])->middleware([TokenVerificationMiddleware::class]);
 Route::post('/category-by-id',[CategoryController::class,'categoryById'])->middleware([TokenVerificationMiddleware::class]);
 Route::post('/category-update',[CategoryController::class,'categoryUpdate'])->middleware([TokenVerificationMiddleware::class]);
+
+//customer front end api page
+Route::get('/customer',[CustomerController::class,'CustomerPage'])->middleware([TokenVerificationMiddleware::class]);
+
+//customers api
+Route::get('/customers-list',[CustomerController::class,'customersList'])->middleware([TokenVerificationMiddleware::class]);
+Route::post('/customer-create',[CustomerController::class,'customerCreate'])->middleware([TokenVerificationMiddleware::class]);
+Route::post('/customer-delete',[CustomerController::class,'deleteCustomer'])->middleware([TokenVerificationMiddleware::class]);
+Route::post('/customer-by-id',[CustomerController::class,'customerById'])->middleware([TokenVerificationMiddleware::class]);
+Route::post('/customer-update',[CustomerController::class,'customerUpdate'])->middleware([TokenVerificationMiddleware::class]);
 

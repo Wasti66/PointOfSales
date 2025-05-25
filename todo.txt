@@ -44,12 +44,29 @@ php artisan make:migration create_categories_table
 php artisan migration
 php artisan make:model Category -mc
 
+Category List show
+Category create
+Category update
+Category delete
+
+3. customers table :
+id->done
+user_id->done->foreign(key)
+name->done
+email->done
+phone->done
+created_at->done
+updated_at->done
+
+command line :
+php artisan make:migration create_customers_table
+php artisan migrate
+php artisan make:model -mc
+
 
 $table->id();
-            $table->string('name',50);
-
-            $table->unsignedBigInteger('User_id');
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->restrictOnDelete();
-            
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+$table->string('name',50);
+$table->unsignedBigInteger('User_id');
+$table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->restrictOnDelete();
+$table->timestamp('created_at')->useCurrent();
+$table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

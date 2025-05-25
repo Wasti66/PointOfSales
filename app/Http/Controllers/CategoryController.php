@@ -15,7 +15,7 @@ class CategoryController extends Controller
     // categories list
     function categoriesList(Request $request){
         $user_id = $request->header('id');
-        return Category::where('user_id', $user_id)->get();
+        return Category::where('user_id', '=', $user_id)->get();
     }
 
     // create categories
