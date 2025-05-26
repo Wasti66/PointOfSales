@@ -47,6 +47,7 @@ php artisan make:model Category -mc
 Category List show
 Category create
 Category update
+Category by id
 Category delete
 
 3. customers table :
@@ -61,8 +62,31 @@ updated_at->done
 command line :
 php artisan make:migration create_customers_table
 php artisan migrate
-php artisan make:model -mc
+php artisan make:model Category -mc
 
+customer List show
+customer create
+customer update
+customer by id
+customer delete
+
+
+4. products table :
+
+id->done
+user_id->done->foreign(key)
+Category_id->done->foreign(key)
+name->done
+price->done
+unit->done
+img_url->done
+created_at->done
+updated_at->done
+
+command line :
+php artisan make:migration create_products_table
+php artisan migrate
+php artisan make:model product -mc
 
 $table->id();
 $table->string('name',50);
